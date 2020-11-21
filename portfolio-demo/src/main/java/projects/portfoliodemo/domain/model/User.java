@@ -6,14 +6,13 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 @EqualsAndHashCode(of = "username")
 @ToString(exclude = "password")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -27,11 +26,10 @@ public class User {
             name = "users_roles",
             joinColumns = @JoinColumn(
                     name = "username",
-                    referencedColumnName ="username"),
+                    referencedColumnName = "username"),
             indexes = @Index(
                     name = "users_roles_username_idx",
-                    columnList = "username" ))
+                    columnList = "username"))
     @Column(name = "role")
     private Set<String> roles;
-
 }
